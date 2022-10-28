@@ -1,0 +1,11 @@
+export { default as Header } from './Header';
+export { default as HomeFirst } from './HomeFirst';
+export { default as HomeSecond } from './HomeSecond';
+export { default as homeThird } from './HomeThird';
+export { default as HomeFourth } from './HomeFourth';
+export { default as HomeFifth } from './HomeFifth';
+export { default as HomeFourthMobile } from './HomeFourthMobile';
+export { default as ProducerSecond } from './ProducerSecond';
+export { default as ProducerFirst } from './ProducerFirst';
+export { default as ProduceThird } from './ProducerThird';
+export { default as HomeAccelrator } from './HomeAccelrator';

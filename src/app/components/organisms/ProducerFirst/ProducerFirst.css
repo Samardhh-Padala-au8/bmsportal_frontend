@@ -1,0 +1,29 @@
+
+
+   .larged{
+        display: inherit;
+   }
+   .smalld{
+        display:none;
+   }
+    
+    .homefirst_arrowstyle{
+        margin-left: 0.8rem;
+    }
+   
+    .homefirst_arrowstyle{
+        margin-left: 0.8rem;
+    }
+   
+    .homefirst_content_side{
+        margin-top:2rem;
+    }
+  
+    @media only screen and (max-width: 700px ){
+        .larged{
+            display:none;
+           }
+           .smalld{
+            display:block;
+           }
+    }

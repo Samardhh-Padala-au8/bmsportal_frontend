@@ -1,0 +1,13 @@
+export { default as Home } from './Home';
+export { default as Faqs } from './Faqs';
+export { default as Producers } from './Producers';
+export { default as SubmitDetail } from './SubmitDetail';
+export { default as Login } from './Login';
+export { default as UploadAudio } from './UploadAudio';
+export { default as UploadAudio2 } from './UploadAudio2';
+export { default as UploadAudio3 } from './UploadAudio3';
+export { default as UploadAudio4 } from './UploadAudio4';
+export { default as UploadAudio5 } from './UploadAudio5';
+export { default as BeatDetail } from './BeatDetail';
+export { default as ReviewDetail } from './ReviewDetail';
+export { default as Jam } from './Jam';

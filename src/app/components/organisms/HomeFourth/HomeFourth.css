@@ -1,0 +1,34 @@
+.homefourth_data{
+  position: absolute;
+  width: auto;
+  min-width: auto;
+  padding-left: 14rem;
+}
+.scroll-container {
+  top: 0px;
+  z-index: 10;
+  position: sticky;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  width: 100vw;
+  max-width:100%;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  overflow: hidden;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.scroll-content {
+    display: flex;
+    width: 100vh;
+    align-items: center;
+}
+  
+.item {
+  flex: 0 0 auto;
+}
+
+  

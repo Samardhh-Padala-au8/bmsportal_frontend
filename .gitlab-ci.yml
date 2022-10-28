@@ -1,0 +1,94 @@
+image: node:14.18.0
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - deploy
+
+variables:
+  LOCAL_DIR: "build"
+
+build:
+  stage: build
+  only:
+    - staging
+    - master 
+  script: 
+    - yarn install
+    - unset CI
+    - yarn run build
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - build/
+
+develop_build:
+  stage: build
+  when: manual
+  only:
+    - develop
+  script: 
+    - yarn install
+    - unset CI
+    - yarn run build
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - build/
+
+deploy_staging:
+  before_script:
+    - apt-get update
+    - apt-get install -y -qq python3-dev python3-pip
+    - pip3 install --upgrade awscli
+    - export PATH=./node_modules/.bin:$PATH
+  variables: 
+    BUCKET: "$S3_BUCKET_STAGING"
+  stage: deploy
+  environment:
+    name: Staging
+  only:
+    - staging 
+  script:
+    - export UPLOAD_DIR=staging
+    - aws s3 sync ./build s3://$S3_BUCKET_STAGING/$UPLOAD_DIR --cache-control max-age=0 
+
+deploy_develop:
+  needs:
+    - develop_build
+  before_script:
+    - apt-get update
+    - apt-get install -y -qq python3-dev python3-pip
+    - pip3 install --upgrade awscli
+    - export PATH=./node_modules/.bin:$PATH
+  variables: 
+    BUCKET: "$S3_BUCKET_STAGING"
+  stage: deploy
+  environment:
+    name: Develop
+  only:
+    - develop 
+  script:
+    - export UPLOAD_DIR=development
+    - aws s3 sync ./build s3://$S3_BUCKET_STAGING/$UPLOAD_DIR --cache-control max-age=0 
+
+deploy_prod:
+  before_script:
+    - apt-get update
+    - apt-get install -y -qq python3-dev python3-pip
+    - pip3 install --upgrade awscli
+    - export PATH=./node_modules/.bin:$PATH
+  variables: 
+    BUCKET: "$S3_BUCKET_PROD"
+  stage: deploy
+  environment:
+    name: Production
+  only:
+    - master 
+  script:
+    - export UPLOAD_DIR=production
+    - aws s3 sync ./build s3://$S3_BUCKET_PROD/$UPLOAD_DIR --cache-control max-age=0
